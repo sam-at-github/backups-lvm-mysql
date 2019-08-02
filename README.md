@@ -1,21 +1,22 @@
 # Overview
-A simple wrapper script to do a MySQL flush, lock, LVM snapshot, unlock, then backup of a MySQL database.
-Good alternative to say `mysqldump`. See http://www.lullabot.com/blog/article/mysql-backups-using-lvm-snapshots.
+A simple wrapper script to get a MySQL backup from an LVM snapshot. The script `./backups-lvm-mysql.sh` does the following:
+
+  1. MySQL flush and lock tables
+  2. Take LVM snapshot
+  3. MySQL unlock tables
+  4. cp snapped MySQL database files to some configured location
+  5. Remove LVM snapshot
+
+A good alternative to say `mysqldump` if your using LVM. See http://www.lullabot.com/blog/article/mysql-backups-using-lvm-snapshots.
 
 # Installation
-The trivial script `install.sh` copies ~everything from the source directory to /etc/backups-lvm-mysql/
-and installs a crontab. You'll want to change the configuration options. Main conf is `backups-conf`.
-May also want to change cron times - or just not use the cron at all. If deps are met everything will work.
+Given a valid config you can run from CWD. Optionally you can exec the Makefile which ~just dumps everything in `/etc/backups-lvm-mysql/`.
+
+    sudo make install
 
 # Usage
 
-    /etc/backups-lvm-mysql/backups.sh
+    ./backups-lvm-mysql.sh
 
 # Dependencies
-
- * cron
- * lvm
- * php5
-
-# Notes
-This setup simply keeps one local snapshot. A remote backup that syncs and rotates that snapshot is a good idea.
+lvm, python3, bash.
