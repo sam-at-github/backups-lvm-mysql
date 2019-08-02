@@ -1,0 +1,6 @@
+#!/bin/bash -e
+cd `dirname $0`
+. backups-lvm-mysql.conf
+SNAPSHOTPATH=`dirname ${VOLUME}`/${SNAPSHOTNAME}
+umount ${LVMMOUNT}
+lvremove ${SNAPSHOTPATH} --force

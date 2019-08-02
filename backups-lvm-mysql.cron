@@ -1,0 +1,7 @@
+# /etc/cron.d/anacron: crontab entries for the anacron package
+MAILTO=root
+SHELL=/bin/sh
+PATH=/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
+
+# m h dom mon dow   command
+# 23 */4 * * *  root  /etc/backups-lvm-mysql/backups.sh

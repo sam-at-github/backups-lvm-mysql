@@ -1,0 +1,8 @@
+#!/bin/bash -e
+cd `dirname $0`
+. backups-lvm-mysql.conf
+[[ -d ${LVMMOUNT} ]] || mkdir -p ${LVMMOUNT}
+[[ -d ${BACKUPROOT} ]] || mkdir ${BACKUPROOT}
+SNAPSHOTPATH=`dirname ${VOLUME}`/${SNAPSHOTNAME}
+./mysql-flush-snap.py -H=localhost -u=${MYUSER} -p=${MYPASS} -v=${VOLUME} -n=${SNAPSHOTNAME}
+mount ${SNAPSHOTPATH} ${LVMMOUNT}
